@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>神の国日本の美しい神社 ― 森井啓二著 GAMBAモジュール</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap');
+
+  :root {
+    --ink:      #1a1410;
+    --paper:    #faf7f2;
+    --gold:     #b8972a;
+    --gold-lt:  #f0e6b8;
+    --vermil:   #c0392b;
+    --forest:   #2d5a3d;
+    --slate:    #5a6a7a;
+    --mist:     #eef0f3;
+    --white:    #ffffff;
+    --radius:   10px;
+    --shadow:   0 4px 18px rgba(0,0,0,.10);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, #1a0a05 0%, #3d1a0a 50%, #1a0a05 100%);
+    color: var(--gold-lt);
+    text-align: center;
+    padding: 36px 20px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '⛩';
+    font-size: 120px;
+    position: absolute;
+    top: -20px; right: -10px;
+    opacity: .08;
+  }
+  .header-eyebrow {
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  header h1 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(20px, 5vw, 32px);
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+  header .subtitle {
+    font-size: 13px;
+    color: #c8b87a;
+    letter-spacing: .06em;
+  }
+
+  /* ── TABS ── */
+  .tab-bar {
+    display: flex;
+    background: #2a1505;
+    overflow-x: auto;
+  }
+  .tab-bar button {
+    flex: 1;
+    min-width: 80px;
+    padding: 13px 8px;
+    background: none;
+    border: none;
+    color: #c8a060;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all .2s;
+    white-space: nowrap;
+  }
+  .tab-bar button:hover { background: rgba(255,255,255,.06); }
+  .tab-bar button.active {
+    color: var(--gold-lt);
+    border-bottom-color: var(--gold);
+    background: rgba(255,255,255,.08);
+  }
+
+  /* ── PANELS ── */
+  .panel { display: none; padding: 24px 16px; max-width: 820px; margin: 0 auto; }
+  .panel.active { display: block; }
+
+  /* ── SECTION CARDS ── */
+  .section-card {
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 20px;
+    border-left: 5px solid;
+    box-shadow: var(--shadow);
+    background: var(--white);
+  }
+  .section-card.prologue { border-color: #b8972a; }
+  .section-card.ch1      { border-color: #c0392b; }
+  .section-card.ch2      { border-color: #2d5a3d; }
+  .section-card.ch3      { border-color: #8e44ad; }
+  .section-card.ch4      { border-color: #2980b9; }
+
+  .section-card .chap-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .section-card.prologue .chap-label { color: #b8972a; }
+  .section-card.ch1      .chap-label { color: #c0392b; }
+  .section-card.ch2      .chap-label { color: #2d5a3d; }
+  .section-card.ch3      .chap-label { color: #8e44ad; }
+  .section-card.ch4      .chap-label { color: #2980b9; }
+
+  .section-card h2 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 17px;
+    margin-bottom: 10px;
+  }
+  .section-card p, .section-card li {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #333;
+  }
+  .section-card ul { padding-left: 18px; }
+  .section-card li { margin-bottom: 4px; }
+
+  /* story block */
+  .story-block {
+    background: linear-gradient(to right, #fff9ee, #fff);
+    border: 1px solid #e8d98a;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    line-height: 1.9;
+    color: #3d2800;
+    position: relative;
+  }
+  .story-block::before {
+    content: '📖';
+    margin-right: 8px;
+  }
+
+  /* keyword badge */
+  .kw {
+    display: inline-block;
+    background: var(--gold-lt);
+    color: #7a5c00;
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-size: 12px;
+    font-weight: 700;
+    margin: 2px 3px;
+  }
+
+  /* info table */
+  .info-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 13px;
+  }
+  .info-table th {
+    background: #2a1505;
+    color: var(--gold-lt);
+    padding: 9px 12px;
+    text-align: left;
+    font-weight: 500;
+  }
+  .info-table td {
+    padding: 9px 12px;
+    border-bottom: 1px solid #ede5d0;
+  }
+  .info-table tr:nth-child(even) td { background: #faf5ea; }
+
+  /* timeline */
+  .timeline { margin: 16px 0; }
+  .tl-item {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 16px;
+    align-items: flex-start;
+  }
+  .tl-dot {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .tl-content { font-size: 13px; line-height: 1.7; }
+  .tl-content strong { display: block; font-size: 14px; margin-bottom: 3px; }
+
+  /* ── FILL-IN-THE-BLANK ── */
+  .quiz-header {
+    background: #2a1505;
+    color: var(--gold-lt);
+    border-radius: var(--radius) var(--radius) 0 0;
+    padding: 14px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .quiz-header h3 { font-size: 15px; font-family: 'Noto Serif JP', serif; }
+  .timer-box {
+    background: var(--gold);
+    color: #1a0a00;
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 16px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .word-bank {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 14px 18px;
+    background: #f5ede0;
+    border: 1px solid #ddd0b0;
+    margin-bottom: 18px;
+  }
+  .word-chip {
+    background: var(--white);
+    border: 2px solid var(--gold);
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background .15s, color .15s;
+    user-select: none;
+  }
+  .word-chip:hover { background: var(--gold); color: var(--white); }
+  .word-chip.used  { opacity: .35; cursor: default; pointer-events: none; }
+
+  .fill-question {
+    background: var(--white);
+    border: 1px solid #e0d0b0;
+    border-radius: 8px;
+    padding: 16px 18px;
+    margin-bottom: 12px;
+    font-size: 14px;
+    line-height: 2;
+  }
+  .blank {
+    display: inline-block;
+    min-width: 80px;
+    border-bottom: 2px solid var(--gold);
+    padding: 2px 8px;
+    margin: 0 4px;
+    font-weight: 700;
+    color: var(--vermil);
+    text-align: center;
+    cursor: pointer;
+    border-radius: 4px 4px 0 0;
+    transition: background .15s;
+  }
+  .blank:hover { background: var(--gold-lt); }
+  .blank.correct { background: #d4f4e2; border-color: #27ae60; color: #1a6e3c; }
+  .blank.wrong   { background: #fde8e8; border-color: var(--vermil); color: var(--vermil); animation: shake .3s; }
+
+  @keyframes shake {
+    0%,100%{transform:translateX(0)} 25%{transform:translateX(-4px)} 75%{transform:translateX(4px)}
+  }
+
+  .progress-bar-wrap {
+    background: #ddd;
+    border-radius: 20px;
+    height: 8px;
+    margin: 6px 0 18px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(to right, var(--gold), var(--vermil));
+    border-radius: 20px;
+    transition: width .4s;
+  }
+
+  .grade-badge {
+    text-align: center;
+    padding: 24px;
+    display: none;
+  }
+  .grade-badge.show { display: block; }
+  .grade-circle {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    font-weight: 700;
+    font-family: 'Noto Serif JP', serif;
+    margin: 0 auto 12px;
+    border: 4px solid;
+  }
+  .grade-A { background: #fff8d0; border-color: #f0c000; color: #7a5c00; }
+  .grade-B { background: #ddf0ff; border-color: #3498db; color: #1a5a8a; }
+  .grade-C { background: #fde8e8; border-color: #e74c3c; color: #8a1a1a; }
+
+  /* ── 4択クイズ ── */
+  .mc-question {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+  }
+  .mc-q-text {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    line-height: 1.6;
+  }
+  .mc-options { display: grid; gap: 8px; }
+  .mc-opt {
+    padding: 12px 16px;
+    border: 2px solid #d0c0a0;
+    border-radius: 8px;
+    background: var(--paper);
+    cursor: pointer;
+    font-size: 13px;
+    text-align: left;
+    transition: all .15s;
+    font-family: 'Noto Sans JP', sans-serif;
+  }
+  .mc-opt:hover   { border-color: var(--gold); background: var(--gold-lt); }
+  .mc-opt.correct { background: #d4f4e2; border-color: #27ae60; color: #1a5a2a; }
+  .mc-opt.wrong   { background: #fde8e8; border-color: var(--vermil); color: #7a1a1a; }
+  .mc-feedback {
+    margin-top: 10px;
+    font-size: 13px;
+    line-height: 1.7;
+    padding: 10px 14px;
+    border-radius: 6px;
+    display: none;
+  }
+  .mc-feedback.show  { display: block; }
+  .mc-feedback.good  { background: #d4f4e2; color: #1a5a2a; }
+  .mc-feedback.bad   { background: #fde8e8; color: #7a1a1a; }
+
+  .mc-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 18px; }
+  .mc-nav span { font-size: 13px; color: var(--slate); }
+
+  /* ── フラッシュカード ── */
+  .fc-wrap { perspective: 800px; margin: 0 auto 20px; max-width: 500px; }
+  .fc-inner {
+    width: 100%;
+    height: 200px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform .5s;
+    cursor: pointer;
+  }
+  .fc-inner.flipped { transform: rotateY(180deg); }
+  .fc-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    text-align: center;
+    box-shadow: var(--shadow);
+  }
+  .fc-front {
+    background: linear-gradient(135deg, #2a1505, #5a2510);
+    color: var(--gold-lt);
+    font-family: 'Noto Serif JP', serif;
+    font-size: 20px;
+  }
+  .fc-back {
+    background: var(--white);
+    color: var(--ink);
+    transform: rotateY(180deg);
+    font-size: 14px;
+    line-height: 1.8;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .fc-back .answer-label {
+    font-size: 10px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+
+  .fc-hint { text-align: center; font-size: 12px; color: var(--slate); margin-bottom: 14px; }
+  .fc-controls { display: flex; justify-content: center; gap: 14px; margin-top: 14px; }
+  .fc-counter { text-align: center; font-size: 13px; color: var(--slate); margin-bottom: 10px; }
+
+  /* ── BUTTONS ── */
+  .btn {
+    padding: 11px 22px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    transition: all .15s;
+  }
+  .btn-gold { background: var(--gold); color: #1a0a00; }
+  .btn-gold:hover { background: #d4a820; }
+  .btn-dark { background: #2a1505; color: var(--gold-lt); }
+  .btn-dark:hover { background: #3d2010; }
+  .btn-outline { background: transparent; border: 2px solid var(--gold); color: var(--gold); }
+  .btn-outline:hover { background: var(--gold); color: #1a0a00; }
+
+  /* confetti canvas */
+  #confetti-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  /* responsive */
+  @media(max-width:500px){
+    .tab-bar button { font-size:11px; padding:11px 6px; }
+    .fc-inner { height:180px; }
+    .fc-front { font-size:17px; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="confetti-canvas"></canvas>
+
+<header>
+  <div class="header-eyebrow">GAMBA 読書まとめ ― 神道・神社</div>
+  <h1>神の国日本の美しい神社</h1>
+  <div class="subtitle">森井啓二 著　｜　高校生向け学習モジュール</div>
+</header>
+
+<nav class="tab-bar">
+  <button class="active" onclick="switchTab('learn', this)">📖 学習</button>
+  <button onclick="switchTab('fill',  this)">✏️ 穴埋め</button>
+  <button onclick="switchTab('quiz',  this)">🎯 4択</button>
+  <button onclick="switchTab('flash', this)">🃏 カード</button>
+</nav>
+
+<!-- ════════════════════════════════════════
+     TAB 1 : 学習
+════════════════════════════════════════ -->
+<div id="tab-learn" class="panel active">
+
+  <div class="story-block">
+    あなたは学校帰りに近所の神社の前を通った。なんとなく鳥居をくぐりたくなる――その不思議な感覚の理由を、この本は縄文時代から宇宙のレベルまで丁寧に紐解いていく。ただの「お参りの仕方」マニュアルではなく、<strong>神社とは何のためにあるのか・人間はなぜここに生まれてきたのか</strong>という根本的な問いへの答えが書かれた一冊だ。著者の森井啓二氏はヨーガ（インドの精神哲学）と日本の神道の視点を融合させながら、誰もが腑に落ちる言葉で語りかけてくる。「神社は宗教施設でなく、魂のガソリンスタンドだ」という著者の表現がすべてを物語っている。
+  </div>
+
+  <!-- 序章 -->
+  <div class="section-card prologue">
+    <div class="chap-label">序章</div>
+    <h2>⛩ 神社の真の目的 ― 天意と人の愛を合わせる場所</h2>
+
+    <p>本書は最初の問いかけから鋭い。「あなたは神社がお好きですか？」――好き嫌い以前に、ほとんどの日本人は神社に訪れ、自然と手を合わせる。初詣・七五三・受験合格祈願・結婚式……日本人の人生のあらゆる節目に神社が寄り添っている。著者はその<strong>「なぜ？」</strong>を深く掘り下げることから始める。</p>
+    <br>
+    <div class="story-block" style="border-color:#b8972a;">
+      🏛️ <strong>神社の定義（本書より）</strong><br><br>
+      神社とは「<strong>神様の天意（宇宙・神の意志）</strong>と<strong>人間の愛（祈り・感謝・奉仕）</strong>を合わせる聖地」である。<br><br>
+      願い事を叶えてもらう場所ではなく、<em>人間が神の意志と調和して生きるための場所</em>だというのが著者の主張だ。つまり神社はサービス窓口ではなく、人間が「神の側」へ近づいていく修練の場なのだ。
+    </div>
+
+    <h3 style="font-size:14px;margin:14px 0 8px;color:#b8972a;">◆ 日本という国の特別な役割</h3>
+    <p style="font-size:14px;line-height:1.9;">著者は日本という国そのものに特別な役割があると述べる。日本は世界で最も神社（約8万社）が密集している国だ。これは偶然ではなく、「<span class="kw">惟神（かんながら）の道</span>」――神の心のままに自然体で生きる生き方――を体現することで、日本が地球全体の精神的な見本になれる国だからだと著者は主張する。先行きの見えない現代だからこそ、神社の本来の力を取り戻すことが日本と世界の再生に繋がるというのだ。</p>
+    <br>
+
+    <h3 style="font-size:14px;margin:14px 0 8px;color:#b8972a;">◆ 神社の歴史的な背景</h3>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot" style="background:#f0e6b8;font-size:18px;">🌿</div>
+        <div class="tl-content">
+          <strong>縄文時代〜　自然崇拝（アニミズム）の始まり</strong><br>
+          日本列島に暮らした縄文人は、山・川・岩・木などの自然すべてに神が宿ると信じた。これを<span class="kw">アニミズム（汎神論）</span>と呼ぶ。特定の「神殿」はなく、山や森そのものが聖地だった。神社の原点はこの「自然そのものへの畏敬と感謝」にある。日本が自然豊かな緑の国であり続けてきた背景には、この自然を神として敬う精神が根底にある。
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:#f0e6b8;font-size:18px;">🏛️</div>
+        <div class="tl-content">
+          <strong>弥生〜古墳時代　神社の形が生まれる</strong><br>
+          特に<span class="kw">神氣（しんき）</span>が強く集まる聖地を特定し、鳥居・参道・拝殿などの構造物を整備することで「参拝できる場所」として確立していった。神社は人工物ではなく、もともと存在する聖地を「人が訪れやすくした」ものだ。そのため神社の多くは山・川・海の近くに位置している。
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:#f0e6b8;font-size:18px;">📜</div>
+        <div class="tl-content">
+          <strong>奈良〜平安時代　神仏習合の時代</strong><br>
+          仏教が伝来（538年または552年）すると、神道と仏教が融合する<span class="kw">神仏習合（しんぶつしゅうごう）</span>の時代が長く続いた。神社の中にお寺があり、お寺の中に神社があるという状態が明治時代まで続く。明治政府による<span class="kw">神仏分離令（1868年）</span>によって現在のような「神社」と「寺院」の分離が生まれた。
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:#f0e6b8;font-size:18px;">🌏</div>
+        <div class="tl-content">
+          <strong>現代　地球規模の精神的見本として</strong><br>
+          著者は現代の神社参拝を「<strong>魂のガソリンスタンド</strong>」と表現する。日常生活で消耗したエネルギーを補充し、方向性を取り戻す場所。先行きの不安な時代だからこそ、神社の持つ本来の力が重要になると著者は説く。
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-size:14px;margin:14px 0 8px;color:#b8972a;">◆ 主要キーワード一覧</h3>
+    <table class="info-table">
+      <tr><th>キーワード</th><th>読み方</th><th>意味・ポイント</th></tr>
+      <tr><td>惟神の道</td><td>かんながらのみち</td><td>「神の心のままに自然体で生きる」日本古来の精神的な生き方。余計な作為を捨て、神の流れに身を委ねる。道教・禅の「無為自然」にも通じる</td></tr>
+      <tr><td>神氣</td><td>しんき</td><td>神社や聖地に漂う目に見えない霊的エネルギー。正しい参拝・清らかな心で共鳴・体感できる。科学では測定困難だが「気持ちが安らぐ・清々しい」という感覚がその証</td></tr>
+      <tr><td>天意</td><td>てんい</td><td>神様・宇宙の意志・方向性。人間の「愛（祈り・感謝・奉仕）」と合わさることで本来の力を発揮する。人間の都合だけを押しつける祈りとは異なる</td></tr>
+      <tr><td>アニミズム</td><td>―</td><td>自然のすべてに魂・精霊が宿るという信仰。日本の神道の根底にある世界観。「八百万の神」という発想の源</td></tr>
+      <tr><td>神仏習合</td><td>しんぶつしゅうごう</td><td>神道と仏教が融合した日本独自の宗教文化。奈良時代〜明治初期まで約1000年以上続いた</td></tr>
+      <tr><td>稀有なる聖地</td><td>けうなるせいち</td><td>日本の神社は世界的に見ても特別な霊的空間。著者は「地球上でこれほど多くの聖地が密集している国は他にない」と述べる</td></tr>
+    </table>
+
+    <div class="story-block" style="margin-top:16px;">
+      🤔 <strong>高校生への問いかけ</strong><br>
+      あなたが神社に行ったとき、どんな気持ちになりますか？「なんとなく落ち着く」「清々しい」という感覚を持ったことはありませんか？本書はその感覚に「神氣との共鳴」という言葉で答えを与えてくれます。
+    </div>
+  </div>
+
+  <!-- 第1章 -->
+  <div class="section-card ch1">
+    <div class="chap-label">第1章</div>
+    <h2>🔑 知られざる神社の心得 ― 心神と賜りし霊の秘密</h2>
+
+    <p>第1章で著者が問いかけるのは「<strong>そもそも人間とは何者か・魂とは何か</strong>」という根本的な問いだ。神社を深く理解するには、まず自分自身の本質を知る必要があると著者は言う。どんな宗教・哲学も「人間とは何か」から始まる。本書はその問いを、日本古来の神道とヨーガ（インド哲学）の両側から解き明かしていく。</p>
+    <br>
+
+    <div class="story-block" style="background:linear-gradient(to right,#fff0f0,#fff);border-color:#c0392b;">
+      💡 <strong>本書の核心概念 ― 賜りし霊（ひ）と主神（すのかみ）</strong><br><br>
+      宇宙の根源・創造主を本書では<span class="kw">主神（すのかみ）</span>と呼ぶ。<br>
+      そのすのかみから分け与えられた霊が、私たちの<span class="kw">魂（＝賜りし霊・ひ）</span>だ。<br><br>
+      「<strong>魂と言葉はすのかみから賜りし霊（ひ）</strong>」<br><br>
+      私たち人間は、神の霊を分けていただいた存在として地上に生きている。魂だけでなく<strong>言葉（言霊）もまたすのかみからの授かりもの</strong>であるため、言葉を大切に使うことが神道の基本姿勢となる。<br><br>
+      ＝ あなたの命は「神様からのレンタル品」ではなく、「神様の一部を分けていただいたもの」だということだ。
+    </div>
+
+    <h3 style="font-size:14px;margin:14px 0 8px;color:#c0392b;">◆ 心（こころ）の霊的な意味</h3>
+    <p style="font-size:14px;line-height:1.9;">著者は「心」という漢字そのものに深い意味が込められていると説く。「心」は<span class="kw">心神（しんしん）</span>、すなわち「すのかみから賜りし霊（ひ）」の働きそのものだ。だから心を乱すことは神から授かった霊を粗末にすることになり、逆に心を磨くことが神への感謝の表れになる。</p>
+    <p style="font-size:14px;line-height:1.9;">日本語の「こころ」という言葉には「ここ（此処）＋ろ（霊）」という語源説もある。つまり「ここに宿る霊」という意味だ。私たちが「心が動く」「心が痛む」という時、それは霊的な感覚を表現しているのかもしれない。</p>
+    <br>
+
+    <h3 style="font-size:14px;margin:14px 0 8px;color:#c0392b;">◆ 人が地上に降りてくる理由</h3>
+    <p style="font-size:14px;line-height:1.9;">本書によれば、人間が地上（物質世界）に生まれてくる目的は「<strong>魂（賜りし霊）を磨き、霊的に進化すること</strong>」だ。これはヨーガ哲学の「魂の輪廻転生」の考え方と共通する。日常の苦労や喜びはすべてその修練の機会であり、神社参拝はその最も効果的な手段のひとつとされる。</p>
+    <p style="font-size:14px;line-height:1.9;">著者は「人生で起こるすべての出来事には意味がある」と述べる。試練も失敗も、魂を磨くための「カリキュラム」なのだというのだ。これは「なぜ自分だけがこんな目に……」という疑問への一つの答えでもある。</p>
+    <br>
+
+    <h3 style="font-size:14px;margin:14px 0 8px;color:#c0392b;">◆ 宇宙照応・天地照応とは</h3>
+    <p style="font-size:14px;line-height:1.9;"><span class="kw">宇宙照応・天地照応</span>とは、「大きなもの（マクロ）と小さなもの（ミクロ）は同じ構造を持つ」という考え方だ。著者はヨーガ哲学の視点から、次の三つが同じ構造を持つと解説する。</p>
+    <table class="info-table">
+      <tr><th>レベル</th><th>対応するもの</th><th>具体例</th></tr>
+      <tr><td>🌌 宇宙（マクロ）</td><td>宇宙全体の構造</td><td>銀河・太陽系・惑星の運行</td></tr>
+      <tr><td>⛩ 神社（中間）</td><td>境内の構造・配置</td><td>鳥居→参道→手水→拝殿の順序</td></tr>
+      <tr><td>🧬 人体（ミクロ）</td><td>人間の体の構造</td><td>チャクラ・経絡・五大元素の体内分布</td></tr>
+    </table>
+    <p style="font-size:14px;line-height:1.9;margin-top:10px;">だから神社を参拝することは、宇宙そのものと共鳴することでもある。「As above, so below（上の如く、下も然り）」というヘルメス哲学の言葉とも一致する普遍的な考え方だ。</p>
+    <br>
+
+    <h3 style="font-size:14px;margin:14px 0 8px;color:#c0392b;">◆ 五大元素と神社参拝の対応</h3>
+    <p style="font-size:14px;line-height:1.9;">インド哲学・ヨーガでは宇宙は<span class="kw">五大元素（地・水・火・風・空）</span>から成ると考える。神社参拝はこの五大元素すべてを自然に体験できる場だ。</p>
+    <table class="info-table">
+      <tr><th>元素</th><th>神社での体験</th><th>身体への作用</th></tr>
+      <tr><td>🪨 地（ち）</td><td>砂利・石段・大地を踏む</td><td>足裏への刺激・グラウンディング（地に足がつく感覚）</td></tr>
+      <tr><td>💧 水（すい）</td><td>手水舎で手と口を清める</td><td>禊の浄化・感覚の覚醒</td></tr>
+      <tr><td>🔥 火（か）</td><td>燈籠・ロウソク・焚き火</td><td>意識の覚醒・浄化のエネルギー</td></tr>
+      <tr><td>🌬️ 風（ふう）</td><td>参道を吹き抜ける風・鈴の音</td><td>心の浄化・邪気払い</td></tr>
+      <tr><td>✨ 空（くう）</td><td>拝殿の空間・広がる境内</td><td>意識の拡大・神氣との共鳴</td></tr>
+    </table>
+    <br>
+
+    <h3 style="font-size:14px;margin:14px 0 8px;color:#c0392b;">◆ 宇宙の霊的周期と現代</h3>
+    <p style="font-size:14px;line-height:1.9;">著者は「宇宙には霊的な進化のサイクル（周期）がある」と述べ、現代はその<strong>大きな転換点</strong>にあると主張する。人類が物質的な豊かさを追い求めてきた時代から、魂（賜りし霊）の輝きを取り戻す時代へのシフトが起きているというのだ。神社参拝の意義がますます高まっている理由がここにある。</p>
+    <br>
+
+    <table class="info-table">
+      <tr><th>概念</th><th>読み方</th><th>詳しい意味</th></tr>
+      <tr><td>主神</td><td>すのかみ</td><td>宇宙の根源・創造主。すべての魂の授与者。神社の御祭神を超えた根源的な存在。特定の宗教の「神」とは異なり、宇宙そのものの意識・エネルギーに近い概念</td></tr>
+      <tr><td>賜りし霊（ひ）＝魂</td><td>たまわりしひ</td><td>すのかみから授けられた霊。私たちの魂・命の本質そのもの。「霊（ひ）」は「日（ひ）・火（ひ）」と同語源で「輝くもの」という意味を持つ</td></tr>
+      <tr><td>心神（しんしん）</td><td>しんしん</td><td>「心」はすのかみから賜った霊の働き。美しく保つことが神への感謝の表れ。心が乱れると神氣と共鳴できなくなる</td></tr>
+      <tr><td>宇宙照応・天地照応</td><td>うちゅうしょうおう</td><td>宇宙・神社・人体は同じ構造を持つ（マクロ＝ミクロ）。参拝＝宇宙との共鳴。ヨーガの「チャクラ」理論・陰陽五行説にも共通する普遍的な考え方</td></tr>
+      <tr><td>五大元素</td><td>ごだいげんそ</td><td>地・水・火・風・空。神社参拝はこれら全てを自然に体験できる場。五感を通じた霊的体験の場でもある</td></tr>
+      <tr><td>霊的進化</td><td>れいてきしんか</td><td>魂（賜りし霊）が磨かれ、より輝きを増すこと。人が地上に生まれてくる目的そのもの</td></tr>
+      <tr><td>宇宙の霊的周期</td><td>―</td><td>宇宙の霊的な進化のサイクル。現代はその大転換点にあり、神社参拝の重要性が高まっている時代とされる</td></tr>
+    </table>
+
+    <div class="story-block" style="margin-top:16px;">
+      🤔 <strong>深く考えてみよう</strong><br>
+      「魂と言葉はすのかみから賜りし霊（ひ）」――もしこれが本当なら、あなたが毎日使っている「言葉」は神様から授かった宝物ということになります。SNSでの言葉の使い方が変わるかもしれません。あなたはどう思いますか？
+    </div>
+  </div>
+
+  <!-- 第2章 -->
+  <div class="section-card ch2">
+    <div class="chap-label">第2章</div>
+    <h2>🚶 神社参拝への道 ― 鳥居から拝殿まで、全てに意味がある</h2>
+
+    <p>第2章は神社境内の各スポットを一つひとつ丁寧に解説する。著者は「参拝の手順には偶然の要素は一つもない」と言い切る。<span class="kw">鳥居をくぐる瞬間から参拝は始まっている</span>のだ。意識を持って歩くことで、同じ神社でも全く異なる体験ができると著者は言う。</p>
+    <br>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot" style="background:#c8ecd4;font-size:20px;">⛩</div>
+        <div class="tl-content">
+          <strong>鳥居（とりい）― 聖域への関門・意識の切り替えスイッチ</strong><br>
+          鳥居は「俗世（日常の世界）」と「聖域（神の世界）」の境界線だ。くぐる時に一礼するのは「私は今、神の領域に入ります」という意志の表明。著者は「鳥居に近づいただけで神氣を感じる人もいる」と述べる。<br><br>
+          鳥居の語源には「鶏の居る場所（鶏居）」説・「通り入る（通り居）」説などがある。赤（朱色）の鳥居は<span class="kw">魔除け・生命力</span>の象徴。石の鳥居は<span class="kw">永続性・大地のエネルギー</span>を表す。鳥居の形状は神社によって異なり（明神鳥居・神明鳥居・両部鳥居など）、それぞれ祀られている神の性質を反映している。
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:#c8ecd4;font-size:20px;">🌿</div>
+        <div class="tl-content">
+          <strong>参道（さんどう）― 心を整える「光の道」・内なる準備の時間</strong><br>
+          参道は単なる通路ではなく「光の道」だ。中央（<span class="kw">正中・せいちゅう</span>）は神様の通り道とされるため、参拝者は端（右側または左側）を歩くのが礼儀。参道を歩く間、心を静かにし、雑念を手放していくことで生命エネルギー（<span class="kw">プラーナ</span>）が整う。<br><br>
+          著者はヨーガの「<span class="kw">経絡（けいらく）</span>」と参道の役割が照応していると述べる。人体に気の通り道（経絡）があるように、神社には神氣の流れる道（参道）がある。歩くだけで気が整い始めるのはこのためだ。玉砂利を踏む音・木々のざわめき・鳥の声も、心を整える助けとなる。
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:#c8ecd4;font-size:20px;">💧</div>
+        <div class="tl-content">
+          <strong>手水舎（てみずしゃ）― 三つの清浄化・禊の現代版</strong><br>
+          「禊（みそぎ）の場」である手水舎で手と口を清めることは、単に衛生的な意味だけではない。著者によると、これは「<strong>思い（心）・言葉・行為（行動）</strong>」の三つを清める象徴的な行為だ。<br><br>
+          手を清める＝行為（これから神前でする行動）を清める<br>
+          口を清める＝言葉（これから唱える言葉・祝詞）を清める<br>
+          ↓ この二つを清めることで、自然と心（思い）も清まる<br><br>
+          水は古来より「穢れを祓う」聖なる要素。滝行・禊・お祓いにも水が使われるのはこのためだ。正式な手水の作法は「右手・左手・口・右手（柄杓を縦にして柄を洗う）」の順。
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:#c8ecd4;font-size:20px;">🐉</div>
+        <div class="tl-content">
+          <strong>龍（りゅう）― 水と浄化を司る実在するエネルギー体</strong><br>
+          手水舎に龍の像が多い理由は偶然ではない。著者は龍を「実際に存在する生命体・エネルギー体」として捉え、水と浄化のエネルギーを司る存在だと説明する。<br><br>
+          龍は日本だけでなく、中国・インド・メソポタミアなど世界各地の神話に登場する普遍的な存在だ。著者によれば「世界中の文明がほぼ同時期に龍の概念を持ったのは、龍が実在するからだ」という。神社の龍は神様の使い（<span class="kw">神使・しんし</span>）として境内を守護し、参拝者の穢れを水と共に洗い流してくれる存在とされる。
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:#c8ecd4;font-size:20px;">🐕</div>
+        <div class="tl-content">
+          <strong>狛犬（こまいぬ）― 真我への関門の番人・阿吽の宇宙観</strong><br>
+          拝殿前の狛犬は「<span class="kw">真我（しんが）＝本来の自分・魂の本質</span>に向かう関門の門番」だ。口を開けた「<span class="kw">阿（あ）</span>」と口を閉じた「<span class="kw">吽（うん）</span>」の形は「阿吽の呼吸」を表す。<br><br>
+          「阿」は宇宙の始まり（最初の音・ビッグバン）を象徴し、「吽」は宇宙の終わり（収束・統合）を象徴する。インドのヨーガでは「AUM（オーム）」という聖音がこれに対応する。狛犬の前では「今の私（日常の自分）を手放し、本来の自分（真我・賜りし霊）として神前に立ちます」という意識を持つことを著者は勧める。
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:#c8ecd4;font-size:20px;">🏛️</div>
+        <div class="tl-content">
+          <strong>拝殿・注連縄（しめなわ）― 神氣の核心・神の領域の境界</strong><br>
+          拝殿は「神を敬い感謝を捧げる場所」だ。<span class="kw">注連縄</span>は「神氣の象徴」であり、その内側が神の領域（神域）であることを示す聖なる境界線でもある。<br><br>
+          注連縄の由来は日本神話の「天岩戸（あまのいわと）」の話に遡る。太陽神・天照大御神が岩戸に隠れて世界が暗闇になったとき、ようやく外に出てきた天照大御神が再び隠れないよう岩戸に縄を張った――これが注連縄の起源とされる。つまり注連縄は「光（神）が宿る場所の印」なのだ。著者は拝殿に近づくにつれて神氣が高まることを「感じる人は必ず感じる」と述べ、心を静かにして向き合うことを勧める。
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:#c8ecd4;font-size:20px;">🦊</div>
+        <div class="tl-content">
+          <strong>神使（しんし）― 神様のメッセンジャーたち</strong><br>
+          神社によって「神使」とされる動物が異なる。これは祀られている神の性質と関係している。<br><br>
+          狐（稲荷神社）→ 農業・食物の神・宇迦之御魂神の使い<br>
+          鹿（春日大社・鹿島神宮）→ 武神・学問の神の使い<br>
+          鳩（八幡神社）→ 応神天皇（八幡神）の使い<br>
+          牛（天満宮）→ 菅原道真公の縁の動物<br>
+          蛇（弁財天）→ 水・財宝の神の使い<br><br>
+          著者は「神使と出会った時は、神様からのメッセージと受け取ることができる」と述べ、敬意を持って接することを勧める。
+        </div>
+      </div>
+    </div>
+
+    <div class="story-block">
+      📌 <strong>第2章のまとめ</strong>：参拝ルートは「外側の汚れを落とし（鳥居・参道・手水）、内側の心を整え（狛犬）、神と向き合う（拝殿）」という段階を踏むように精巧に設計されている。何気なく行っている参拝の一つひとつの所作に、深い霊的・精神的な意図が込められているのだ。次に神社を訪れる時は、意識を持ってゆっくり歩いてみよう。
+    </div>
+  </div>
+
+  <!-- 第3章 -->
+  <div class="section-card ch3">
+    <div class="chap-label">第3章</div>
+    <h2>🎵 神社参拝の秘訣 ― 恩頼（みたまのふゆ）を受け取る方法</h2>
+
+    <p>第3章では、拝殿での作法や境内のさまざまな要素が持つ深い意味を解説する。著者が繰り返し強調するのは「<span class="kw">恩頼（みたまのふゆ）</span>」という言葉だ。これは「神様の御霊の恵み・加護」を意味し、正しく誠実に参拝することで人はこの恩頼を受け取ることができる。恩頼は目に見えないが、「なぜかうまくいった」「ふと良いアイデアが浮かんだ」「危険を直感的に避けられた」という体験として現れる。</p>
+    <br>
+
+    <h3 style="font-size:14px;margin:0 0 10px;color:#8e44ad;">◆ 拝殿での作法と深い意味</h3>
+    <table class="info-table">
+      <tr><th>参拝要素</th><th>霊的・精神的な深い意味</th></tr>
+      <tr><td>🔔 鈴の音</td><td>鈴の高く澄んだ音は<strong>真我（賜りし霊）を呼び起こす振動</strong>だ。邪気（ネガティブなエネルギー）を祓い、参拝者の心と神域を清浄化する。著者はこの振動がヨーガの「マントラ（聖なる音）」に相当すると述べる。音の振動が空気を浄化し、神氣の流れを整えるのだ。鈴は「賽銭箱の上の縄（鈴緒）を揺らして鳴らす」が正式な使い方</td></tr>
+      <tr><td>💴 御賽銭</td><td>「捧げる心」の表現。金額の多さではなく<strong>純粋な感謝と敬意の気持ち</strong>が大切。著者は「神様はお金を必要としない。あなたの心の向きを見ている」と述べる。御賽銭には「祓い（はらい）」の側面もあり、自分の穢れ（ケガレ）を神前に委ねるという意味も持つ。また「賽（さい）」の字は「神に捧げる」という意味を持つ</td></tr>
+      <tr><td>🙏 二拝二拍手一拝</td><td>比較的新しい（明治以降に全国統一された）作法だが、各動作に深い意味がある。<strong>二拝</strong>は「天（神）と地（人間・自分）への礼・感謝」を表し、<strong>二拍手</strong>は「陰と陽・天地を呼び覚ます音霊（ことだま）」を表し、<strong>一拝</strong>は「神と真我（賜りし霊）が統合した意識の目覚め・一体感」を表す。手を合わせる「合掌」はインド・仏教にも共通する「二極の統合」のシンボル</td></tr>
+      <tr><td>📜 祝詞（のりと）</td><td>日本語の<span class="kw">言霊（ことだま）</span>の力を最大限に活用した聖なる言葉群。すのかみから授けられた「言葉（賜りし霊）」を神に返すような行為。著者は「美しく音読することで神氣と共鳴する」と述べる。祝詞には「大祓詞（おおはらえのことば）」「祝詞（のりと）」「和歌（わか）」などがあり、声に出して唱えることで言霊の力が働く</td></tr>
+      <tr><td>🎴 おみくじ</td><td>単なる占いではなく「<strong>神意（しんい）を伺うツール</strong>」だ。大吉・凶などの吉凶より、書かれている言葉の内容をよく読み込み、今の自分へのメッセージとして受け取ることが大切。著者は「凶が出ても、それは警告として神様があなたに伝えたいことがある」と述べる。結果を木に結ぶのは「凶の気を木（気）に変える」という意味もある</td></tr>
+      <tr><td>🪧 絵馬</td><td>願いを具体的に<strong>言葉と文字</strong>で書き表すことで、言霊の力が働き願いの実現が加速するとされる。書く時のポイントは①具体的に書く②「すでに叶った」という感謝の気持ちで書く③名前・日付を書く。過去形・現在完了形（「〜できました」「〜になれた」）で書くとより効果的だという。絵馬の起源は生きた馬を神社に奉納していた慣習</td></tr>
+      <tr><td>🌳 御神木（ごしんぼく）</td><td>鎮守の森のシンボル。著者は「植物は知的生命体であり、御神木は長い年月をかけて神氣を蓄えた特別な存在」と述べる。御神木に手をあてると神氣を感じる人も多い。切ったり傷つけたりすることは厳禁。感謝の気持ちで「パワーをいただきます」と心の中で伝えてから触れると良い。樹齢数百年〜千年以上の御神木は、その場所の歴史を見続けてきた存在でもある</td></tr>
+      <tr><td>🍶 御神酒（おみき）</td><td>神様への尊い捧げものであり、御神事の後に「神と共に食をいただく（<span class="kw">神人共食・しんじんきょうしょく</span>）」という意味を持つ。御神酒をいただくことは神様の力（神氣）をいただく行為とされる。お神酒は「酒（さかき）→境木（さかき）→榊（さかき）」と同語源という説もあり、神聖な植物・榊と同じ「境（境界線）」の意味を持つ</td></tr>
+      <tr><td>🕯️ 燈籠（とうろう）</td><td>「真我の導きの灯り」とされる。「<span class="kw">長者の万灯より貧者の一灯</span>」という言葉通り、一つの灯りであっても純粋な心から捧げるものの方が尊い。燈籠の火は「神氣を可視化したもの・神聖なエネルギーの象徴」でもある。現代では電気に置き換えられることも多いが、本来は生の炎が持つエネルギーが重要とされた</td></tr>
+      <tr><td>⚡ 紙垂（しで）</td><td>注連縄などにぶら下がる白い稲妻形の紙。「神からの閃き（インスピレーション）・神氣の流れの象徴」だ。稲妻（雷）の形は電気エネルギー・神氣の流れを視覚化したもの。白色は清浄・純粋さの象徴でもある。紙垂は「四手（しで）」とも書き、四方に手を伸ばす（神の力が四方に広がる）という意味もある</td></tr>
+      <tr><td>🔰 神紋（しんもん）</td><td>各神社の家紋のようなシンボルマーク。著者は「神紋にはその神社の神氣・エネルギーが秘められている」と述べ、お神札やお守りの神紋に意識を向けることを勧める。有名な神紋として、菊紋（伊勢神宮）・三つ巴（八幡神社）・三つ柏（香取神宮）などがある。神紋は神様の「霊的なロゴマーク」と言える</td></tr>
+      <tr><td>🎋 御神札（おふだ）・御守（おまもり）</td><td>神社から授かる御神札は「神社の分社（分霊）」であり、家に飾ることで自宅が神社と繋がる。御守は「守ってもらうもの」ではなく「神氣のエネルギーを常に身近に置く」ためのもの。著者は「御守は1年ごとに新しいものと交換し、古いものは神社に納めるのが理想」と述べる</td></tr>
+    </table>
+    <br>
+
+    <h3 style="font-size:14px;margin:14px 0 8px;color:#8e44ad;">◆ 薫習（くんじゅう）と守・破・離</h3>
+    <p style="font-size:14px;line-height:1.9;">著者が参拝を続ける意義として紹介するのが<span class="kw">薫習（くんじゅう）</span>という概念だ。もとは仏教用語で「お香の香りが少しずつ衣服に染み込む」様子に例えた言葉だ。「良い習慣・行いが繰り返されることで魂（賜りし霊）に深く染み込んでいく」という現象を指す。参拝は一度で大きな変化が起きるものではなく、続けることに価値がある。</p>
+    <p style="font-size:14px;line-height:1.9;">著者は武道・茶道などの「<span class="kw">守・破・離（しゅはり）</span>」の段階も紹介する。「守」は正しい形を忠実に学ぶ段階、「破」は応用・自分なりの解釈を加える段階、「離」は形を超えて自由に表現できる段階だ。参拝においても、まず「守」の段階として正しい形を身につけることが出発点となる。</p>
+    <br>
+
+    <h3 style="font-size:14px;margin:14px 0 8px;color:#8e44ad;">◆ 願いが叶うメカニズム</h3>
+    <p style="font-size:14px;line-height:1.9;">本書は「願い事が叶う・叶わない」という現実的な問いも正面から扱う。著者によれば、願いが叶うかどうかは<strong>「心の穢れ（ケガレ）の有無」</strong>と深く関係している。</p>
+    <table class="info-table">
+      <tr><th>心の状態</th><th>神氣との共鳴</th><th>願いへの影響</th></tr>
+      <tr><td>心が穢れている（怒り・恨み・怠惰・嫉妬）</td><td>共鳴できない</td><td>願いが神まで届きにくい</td></tr>
+      <tr><td>心が清まっている（感謝・喜び・愛・奉仕）</td><td>共鳴できる</td><td>閃き（インスピレーション）として神のサポートが届く</td></tr>
+    </table>
+    <p style="font-size:14px;line-height:1.9;margin-top:10px;">著者は「神社に行って願うより、日常の心を清める努力の方が大切だ」と述べる。神社はその清浄化を加速させる場であって、「汚れたまま行けば叶えてもらえる自動販売機」ではないのだ。</p>
+
+    <div class="story-block" style="margin-top:16px;">
+      🤔 <strong>深く考えてみよう</strong><br>
+      「おみくじで大吉が出たからラッキー」「凶が出て縁起が悪い」という考え方と、本書が述べる「おみくじは神意のメッセージを読むツール」という考え方。どちらがより豊かな体験になると思いますか？
+    </div>
+  </div>
+
+  <!-- 第4章 -->
+  <div class="section-card ch4">
+    <div class="chap-label">第4章</div>
+    <h2>🌌 神社参拝を進化させる ― 宇宙に遍満する純粋意識と繋がる</h2>
+
+    <p>第4章は本書のクライマックスだ。ここまで「作法」を学んできた読者に向けて、著者は参拝をさらに深いレベルへ進化させる方法を伝える。それは「<strong>外側の作法を守る段階（守）から、内なる変容へ（破・離）</strong>」というシフトだ。本章を読むと、神社参拝が単なる宗教的儀式を超えた、<strong>人生そのものの哲学</strong>に変わっていく。</p>
+    <br>
+
+    <h3 style="font-size:14px;margin:0 0 10px;color:#2980b9;">◆ ケガレとハレの仕組み ― 日本人の感性に刻まれたサイクル</h3>
+    <p style="font-size:14px;line-height:1.9;">日本語の「<span class="kw">ケガレ</span>」は「気（け）が枯れた（かれ）」状態、すなわち<strong>エネルギーが枯渇し、魂（賜りし霊）が曇った状態</strong>のことだ。日常生活を送るうちに人は自然とケガレていく。</p>
+    <p style="font-size:14px;line-height:1.9;">対して「<span class="kw">ハレ</span>」はその反対。神事や祭りで気が満ち、魂が輝いた特別な清浄状態を指す。「晴れ着」「晴れ舞台」という言葉の「晴れ」がこのハレだ。</p>
+    <table class="info-table">
+      <tr><th>概念</th><th>語源・意味</th><th>現代的な例</th></tr>
+      <tr><td>ケガレ（穢れ）</td><td>「気が枯れた」＝エネルギーが枯渇した状態</td><td>ストレスで疲弊している・モヤモヤが続く・無気力・怒りや恨みを抱えている</td></tr>
+      <tr><td>ハレ（晴れ）</td><td>「気が満ちた」＝魂が輝く清浄な特別状態</td><td>神社参拝後の清々しさ・お祭りの高揚感・感動して涙が出る瞬間・ゾーンに入った体験</td></tr>
+      <tr><td>ミソギ（禊）</td><td>穢れを水で洗い流す浄化の行為</td><td>手水舎・滝行・海や川での禊（現代では難しいが、シャワーや入浴にも類似の効果）</td></tr>
+    </table>
+    <p style="font-size:14px;line-height:1.9;margin-top:10px;">神社参拝はこのケガレをリセットしてハレへ戻るための仕組みそのものだ。だから参拝の後に「なんとなく気持ちが軽くなった」という感覚を持つ人が多い。これは偶然でも気のせいでもなく、神氣との共鳴によってケガレがリセットされているのだ、と著者は述べる。</p>
+    <br>
+
+    <h3 style="font-size:14px;margin:14px 0 8px;color:#2980b9;">◆ 御神事・お祭りの本当の意味</h3>
+    <p style="font-size:14px;line-height:1.9;"><span class="kw">御神事（ごしんじ）やお祭り</span>は著者が「最も神氣を体感できる機会」と位置づける。「祭り（まつり）」という言葉は「奉る（たてまつる）」に由来し、「神に魂を捧げる行為」を意味する。見物するだけでなく、<strong>能動的・積極的に参加すること</strong>に意義がある。</p>
+    <p style="font-size:14px;line-height:1.9;">また<span class="kw">御奉仕（ごほうし）</span>――神社でのボランティア清掃・お手伝い――は「最も優れた霊性修行」だと著者は言い切る。なぜなら見返りを求めない純粋な奉仕の精神は、魂（賜りし霊）を最も速く磨く行為だからだ。「神社に行って祈るより、神社のために動く人の方が神に近い」という著者の言葉は印象的だ。</p>
+    <br>
+
+    <h3 style="font-size:14px;margin:14px 0 8px;color:#2980b9;">◆ 魂の中にある三種の神器</h3>
+    <p style="font-size:14px;line-height:1.9;"><span class="kw">三種の神器</span>（八咫鏡・草薙剣・八尺瓊勾玉）は天皇が代々受け継ぐ日本最高の宝物として有名だが、著者は「これらは外の世界にあるだけでなく、<strong>私たち一人ひとりの魂（賜りし霊）の中にも存在する</strong>」と述べる。</p>
+    <table class="info-table">
+      <tr><th>神器</th><th>外の世界での意味</th><th>魂の中での意味</th><th>磨き方</th></tr>
+      <tr><td>🪞 八咫鏡（やたのかがみ）</td><td>天照大御神の象徴。「正直・清明」を表す</td><td>純粋な心・真実を映す内なる鏡。自分を正直に見る力</td><td>日記・内省・瞑想</td></tr>
+      <tr><td>⚔️ 草薙剣（くさなぎのつるぎ）</td><td>「勇気・決断」を表す</td><td>煩悩・迷い・執着を断ち切る智慧と勇気</td><td>決断力を磨く・不要な執着を手放す</td></tr>
+      <tr><td>🟢 八尺瓊勾玉（やさかにのまがたま）</td><td>「慈愛・和」を表す</td><td>生命エネルギー・愛・慈悲の象徴。他者への思いやり</td><td>感謝・奉仕・愛を表現する日常</td></tr>
+    </table>
+    <br>
+
+    <h3 style="font-size:14px;margin:14px 0 8px;color:#2980b9;">◆ 神々の多様性と本質の一つ</h3>
+    <p style="font-size:14px;line-height:1.9;">日本には<span class="kw">八百万（やおよろず）の神々</span>がいると言われ、全国8万社の神社に様々な御祭神が祀られている。著者はその多様性を否定せず、むしろ「<strong>神々の名前・姿は時代や場所によって変化するが、その本質（根源）はすべて主神（すのかみ）一つだ</strong>」と述べる。</p>
+    <p style="font-size:14px;line-height:1.9;">これは世界の宗教にも共通する考え方だ。キリスト教・イスラム教・仏教・ヒンドゥー教……それぞれ異なる名前と形式を持つが、「唯一の根源（神・ブラフマン・Allah・神性）に向かう異なる道」だという視点だ。著者は「宗教の違いを超えて、すべての人間は主神（すのかみ）の賜りし霊（ひ）を持つ同じ存在だ」と述べる。</p>
+    <br>
+
+    <h3 style="font-size:14px;margin:14px 0 8px;color:#2980b9;">◆ 心の穢れと天変地異 ― 個人と社会・自然の繋がり</h3>
+    <p style="font-size:14px;line-height:1.9;">著者は「心の穢れが起こす天変地異」という大胆な章を設けている。個人の心の穢れが集積すると、社会や自然環境に影響を与えるという考え方だ。現代風に言えば「人類の集合的な意識の質が、地球環境に影響する」という仮説に相当する。</p>
+    <p style="font-size:14px;line-height:1.9;">逆に言えば、一人ひとりが心を磨き（賜りし霊を輝かせ）、神氣と共鳴することが、世界平和や環境問題の解決にも繋がるというのが著者のメッセージだ。「地球を救うために神社に行く」という発想は大げさに聞こえるかもしれないが、一人の心の清浄化が周囲に広がっていく「薫習」の連鎖を考えれば、あながち荒唐無稽ではない。</p>
+    <br>
+
+    <h3 style="font-size:14px;margin:14px 0 8px;color:#2980b9;">◆ 本書の背景にある著者の思想</h3>
+    <p style="font-size:14px;line-height:1.9;">森井啓二氏はヨーガ・インド哲学の研究者でもあり、本書はその視点から日本の神道を再解釈したものだ。ヨーガ哲学の「アートマン（個我）とブラフマン（宇宙我）は一つ」という考え方は、本書の「賜りし霊（ひ）はすのかみから分かれたもの」という考え方と完全に対応している。東洋の複数の精神的伝統が指し示す「同じ真実」が、日本の神社というフィールドで体験できると著者は主張する。</p>
+    <br>
+
+    <table class="info-table">
+      <tr><th>概念</th><th>読み方</th><th>意味・重要ポイント</th></tr>
+      <tr><td>ケガレ</td><td>けがれ</td><td>「気が枯れた」状態。エネルギー枯渇・魂が曇った日常状態。怒り・恨み・怠惰・嫉妬などが原因。参拝でリセットできる</td></tr>
+      <tr><td>ハレ</td><td>はれ</td><td>神事・祭りで気が満ちた清浄な特別状態。「晴れ着・晴れ舞台」の語源。ケガレがリセットされた後に訪れる輝きの状態</td></tr>
+      <tr><td>禊（みそぎ）</td><td>みそぎ</td><td>水で穢れを洗い流す浄化の行為。手水はその現代版。イザナギノミコトの禊が神道での禊の原点</td></tr>
+      <tr><td>御奉仕（ごほうし）</td><td>ごほうし</td><td>神社でのボランティア。見返りを求めない奉仕が最高の霊性修行。「祈るより動く」精神</td></tr>
+      <tr><td>三種の神器（内なる）</td><td>さんしゅのじんぎ</td><td>鏡（純粋な心）・剣（煩悩を断つ智慧）・勾玉（生命エネルギー）。外の神器だけでなく魂の中にも存在する</td></tr>
+      <tr><td>恩頼（みたまのふゆ）</td><td>みたまのふゆ</td><td>神様の御霊の恵み・加護。正しく誠実に参拝することで授かるもの。閃きや良縁・守護として現れる</td></tr>
+      <tr><td>純粋意識</td><td>じゅんすいいしき</td><td>宇宙に遍満する完全な意識。すのかみの意識そのもの。参拝の深化・瞑想・極度の集中（ゾーン）状態で触れることができる</td></tr>
+      <tr><td>八百万の神</td><td>やおよろずのかみ</td><td>日本の神々の多様性。すべての本質はすのかみ（主神）一つ。世界の宗教の多様性とも対応する考え方</td></tr>
+    </table>
+    <br>
+
+    <div class="story-block">
+      🌟 <strong>著者の最終メッセージ</strong><br><br>
+      「感謝と喜びを持って日々を過ごし、神社を通じて宇宙の純粋意識（すのかみ）と繋がること。それがあなたの賜りし霊（魂）を輝かせ、最高の人生を手に入れる道だ。」<br><br>
+      本書は特定の宗教への勧誘ではなく、<strong>神社という日本固有の文化を通じた「生き方の哲学」</strong>を提示している。神社を訪れるたびに、あなたの中の賜りし霊が少しずつ輝きを増していく――それが著者の願いだ。<br><br>
+      最後に著者はこう問いかける。「あなたはどんな人生を生きたいですか？その答えを持って、明日、神社を訪れてみてください。」
+    </div>
+
+    <div class="story-block" style="margin-top:16px;">
+      🤔 <strong>高校生への最終的な問いかけ</strong><br>
+      この本を読んで、あなたの「神社観」は変わりましたか？「神社＝願い事を聞いてくれる場所」から「神社＝自分の賜りし霊（魂）を磨く場所」という視点。あなた自身はどちらに共感しますか？また、もし今日神社に行けるなら、何を「祈り」ますか？それとも「感謝」しますか？
+    </div>
+  </div>
+
+</div>
+
+
+
+<!-- ════════════════════════════════════════
+     TAB 2 : 穴埋め
+════════════════════════════════════════ -->
+<div id="tab-fill" class="panel">
+  <div class="quiz-header">
+    <h3>✏️ 穴埋め問題</h3>
+    <div class="timer-box" id="fill-timer">03:00</div>
+  </div>
+
+  <div style="padding:12px 0;">
+    <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--slate);margin-bottom:4px;">
+      <span>進捗</span><span id="fill-prog-text">0 / 12</span>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" id="fill-prog-bar" style="width:0%"></div></div>
+  </div>
+
+  <p style="font-size:12px;color:var(--slate);margin-bottom:12px;">下のワードバンクから選んで空欄をクリックして埋めよう。</p>
+
+  <div class="word-bank" id="word-bank">
+    <span class="word-chip" onclick="selectWord(this)">惟神の道</span>
+    <span class="word-chip" onclick="selectWord(this)">天意</span>
+    <span class="word-chip" onclick="selectWord(this)">神氣</span>
+    <span class="word-chip" onclick="selectWord(this)">心神</span>
+    <span class="word-chip" onclick="selectWord(this)">鳥居</span>
+    <span class="word-chip" onclick="selectWord(this)">手水舎</span>
+    <span class="word-chip" onclick="selectWord(this)">言霊</span>
+    <span class="word-chip" onclick="selectWord(this)">薫習</span>
+    <span class="word-chip" onclick="selectWord(this)">ケガレ</span>
+    <span class="word-chip" onclick="selectWord(this)">御神木</span>
+    <span class="word-chip" onclick="selectWord(this)">主神</span>
+    <span class="word-chip" onclick="selectWord(this)">賜りし霊</span>
+  </div>
+
+  <div class="fill-question">①　神社は「神様の<span class="blank" data-ans="天意" onclick="fillBlank(this)">　　　　</span>と人の愛を合わせる場所」だと本書は述べている。</div>
+  <div class="fill-question">②　「神の心のままに生きる」古来の生き方を<span class="blank" data-ans="惟神の道" onclick="fillBlank(this)">　　　　</span>という。</div>
+  <div class="fill-question">③　神社に漂う目に見えないエネルギーを<span class="blank" data-ans="神氣" onclick="fillBlank(this)">　　　　</span>と呼ぶ。</div>
+  <div class="fill-question">④　著者は「心」を「神から賜った霊」すなわち<span class="blank" data-ans="心神" onclick="fillBlank(this)">　　　　</span>の贈り物と説明する。</div>
+  <div class="fill-question">⑤　神社参拝の入口、俗世と聖域の境界となる構造物を<span class="blank" data-ans="鳥居" onclick="fillBlank(this)">　　　　</span>という。</div>
+  <div class="fill-question">⑥　参拝前に心身を清める場所（禊の場）を<span class="blank" data-ans="手水舎" onclick="fillBlank(this)">　　　　</span>という。</div>
+  <div class="fill-question">⑦　日本語の言葉に宿る霊的な力のことを<span class="blank" data-ans="言霊" onclick="fillBlank(this)">　　　　</span>という。祝詞の力の根源だ。</div>
+  <div class="fill-question">⑧　良い習慣が魂に染み込んでいく現象を「<span class="blank" data-ans="薫習" onclick="fillBlank(this)">　　　　</span>」と呼び、参拝継続の価値を示す。</div>
+  <div class="fill-question">⑨　日常の状態を「<span class="blank" data-ans="ケガレ" onclick="fillBlank(this)">　　　　</span>」、特別な清浄な状態を「ハレ」と対比させて説明する。</div>
+  <div class="fill-question">⑩　鎮守の森のシンボルとされ、知的生命体として尊重すべき存在が<span class="blank" data-ans="御神木" onclick="fillBlank(this)">　　　　</span>だ。</div>
+  <div class="fill-question">⑪　宇宙の根源・創造主のことを本書では<span class="blank" data-ans="主神" onclick="fillBlank(this)">　　　　</span>（すのかみ）と呼ぶ。</div>
+  <div class="fill-question">⑫　「魂と言葉はすのかみから<span class="blank" data-ans="賜りし霊" onclick="fillBlank(this)">　　　　</span>（ひ）」――人間は神の霊を分けていただいた存在だ。</div>
+
+  <div style="text-align:center;margin-top:16px;">
+    <button class="btn btn-outline" onclick="resetFill()">🔄 リセット</button>
+  </div>
+
+  <div class="grade-badge" id="fill-grade">
+    <div class="grade-circle" id="grade-circle"></div>
+    <div id="grade-msg" style="font-size:15px;font-weight:700;"></div>
+    <div id="grade-sub" style="font-size:13px;color:var(--slate);margin-top:6px;"></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     TAB 3 : 4択クイズ
+════════════════════════════════════════ -->
+<div id="tab-quiz" class="panel">
+  <div id="mc-container"></div>
+  <div class="mc-nav">
+    <button class="btn btn-dark" id="mc-prev" onclick="mcMove(-1)">◀ 前へ</button>
+    <span id="mc-count">1 / 10</span>
+    <button class="btn btn-gold" id="mc-next" onclick="mcMove(1)">次へ ▶</button>
+  </div>
+  <div style="margin-top:20px;text-align:center;">
+    <button class="btn btn-outline" onclick="mcReset()">🔄 最初から</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     TAB 4 : フラッシュカード
+════════════════════════════════════════ -->
+<div id="tab-flash" class="panel">
+  <div class="fc-hint">カードをクリックすると裏面（解説）が見られます</div>
+  <div class="fc-counter" id="fc-counter">1 / 10</div>
+  <div class="fc-wrap">
+    <div class="fc-inner" id="fc-inner" onclick="flipCard()">
+      <div class="fc-face fc-front" id="fc-front"></div>
+      <div class="fc-face fc-back" id="fc-back"></div>
+    </div>
+  </div>
+  <div class="fc-controls">
+    <button class="btn btn-dark" onclick="fcMove(-1)">◀ 前へ</button>
+    <button class="btn btn-outline" onclick="flipCard()">🔄 めくる</button>
+    <button class="btn btn-gold" onclick="fcMove(1)">次へ ▶</button>
+  </div>
+</div>
+
+<script>
+// ─── Data ───────────────────────────────────
+const mcData = [
+  { q:"本書で著者が述べる「神社の真の目的」として最も適切なものはどれか？",
+    opts:["願い事を確実に叶える場所","神様の天意と人の愛を合わせる場所","観光客が参拝する文化施設","歴史的建造物を保存する場所"],
+    ans:1, expl:"序章で著者は「神社とは神様の天意（宇宙の意志）と人の愛を合わせる聖地」だと定義しています。" },
+  { q:"「惟神の道（かんながらのみち）」の意味として正しいものはどれか？",
+    opts:["神社への最短ルートのこと","参道の歩き方の作法","神の心のままに生きる古来の生き方","祭りの行列の順序"],
+    ans:2, expl:"「惟神の道」は「神の意志のままに自然体で生きる」という日本古来の精神的な生き方のことです。" },
+  { q:"本書で「魂と言葉は〇〇から賜りし霊（ひ）」と述べられている。〇〇に入る言葉はどれか？",
+    opts:["天照大御神（あまてらすおおみかみ）","主神（すのかみ）","大国主命（おおくにぬしのみこと）","瓊瓊杵尊（ににぎのみこと）"],
+    ans:1, expl:"本書の核心概念のひとつ。「魂と言葉は主神（すのかみ）から賜りし霊（ひ）」であり、人間は宇宙の根源であるすのかみから魂を授けられた存在だとされています。" },
+  { q:"「宇宙照応・天地照応」が示す考え方として正しいものはどれか？",
+    opts:["地球の気候と宇宙は無関係","人体・神社・宇宙の構造はマクロとミクロで対応している","天文学と神道は全く別の学問","照応とは光の反射のこと"],
+    ans:1, expl:"著者はヨーガの「照応（マクロ＝ミクロ）」の概念を使い、人体と神社と宇宙は同じ構造を持つと説明しています。" },
+  { q:"神社参拝で「鳥居」が持つ意味として、本書が述べているものはどれか？",
+    opts:["魔除けの飾り","俗世と聖域の境界線・神の領域に入る意志の表明","参拝客を数えるための目印","建築的な強度を保つ構造物"],
+    ans:1, expl:"第2章で鳥居は「神聖な場所への門」であり、くぐることで「俗世から聖域へ入る意志を示す」とされています。" },
+  { q:"手水舎（てみずしゃ）の役割として本書が述べているものはどれか？",
+    opts:["御朱印をもらう場所","参拝後に振り返って合掌する場所","禊の場 ― 思い・言葉・行為を清める","神様へのお供えを置く場所"],
+    ans:2, expl:"手水舎は「禊の場」であり、手と口を清めることで思い・言葉・行為の三つを清浄化する場所とされています。" },
+  { q:"日本語の言葉に宿る霊的な力を何というか？",
+    opts:["神技（しんぎ）","言霊（ことだま）","心技（こころわざ）","天音（あまおと）"],
+    ans:1, expl:"「言霊」は日本語の言葉に宿る霊的な力のこと。祝詞（のりと）の効果の根源とされています。" },
+  { q:"「薫習（くんじゅう）」という概念の意味として正しいものはどれか？",
+    opts:["お香を焚いて神様を呼び込むこと","良い習慣が魂に染み込んでいくこと","境内を掃除する修行","特定の参拝コースを歩くこと"],
+    ans:1, expl:"薫習は仏教・神道の概念で「良い習慣・行いが繰り返されることで魂に深く染み込んでいく」という意味です。" },
+  { q:"本書での「ケガレとハレ」の説明として正しいものはどれか？",
+    opts:["汚れた服と晴れ着の対比","日常状態（ケガレ）をリセットし清浄な特別状態（ハレ）に戻る仕組み","農業における天気の種類","地域によって異なる方言"],
+    ans:1, expl:"第4章でケガレ（日常の曇り・穢れた状態）とハレ（祭り・参拝による浄化・特別な清浄状態）の対比が説明されています。" },
+  { q:"著者が「御神事・お祭り」への参加について述べていることとして正しいのはどれか？",
+    opts:["見るだけでも十分な霊的体験","最も神氣を体感できる機会で、能動的に参加することが大切","子どもだけが楽しむ行事","ボランティアは控えるべき"],
+    ans:1, expl:"お祭りは「最も神氣を体感できる機会」であり、見るだけでなく能動的・積極的に参加することに意義があると述べています。" }
+];
+
+const fcData = [
+  { front:"主神（すのかみ）",    back:"宇宙の根源・創造主。私たちの魂（賜りし霊）はすのかみから授けられたものだと本書は述べる。" },
+  { front:"賜りし霊（ひ）＝魂", back:"「魂と言葉はすのかみから賜りし霊（ひ）」。人間は神の霊を分けていただいた存在として地上に生きている。" },
+  { front:"神氣（しんき）",      back:"神社に漂う目に見えない霊的エネルギー。正しい参拝で神社はその力を発揮するとされる。" },
+  { front:"惟神の道",            back:"「神の心のままに生きる」という日本古来の精神的な生き方。本書の核心概念のひとつ。" },
+  { front:"心神（しんしん）",    back:"「心」は神から賜った霊（賜りし霊＝ひ）。すのかみからの贈り物として大切に扱うべき存在。" },
+  { front:"宇宙照応・天地照応",  back:"人体・神社・宇宙はマクロとミクロで同じ構造を持つ（ヨーガ哲学の影響）。" },
+  { front:"手水舎（てみずしゃ）",back:"禊の場。手と口を清めることで「思い・言葉・行為」の三つを清浄化する。" },
+  { front:"言霊（ことだま）",    back:"日本語の言葉に宿る霊的な力。魂（賜りし霊）と同様、すのかみから授けられたもの。祝詞の効果の根源。" },
+  { front:"薫習（くんじゅう）",  back:"良い習慣・行いが繰り返されることで魂に深く染み込んでいく現象。参拝継続の理由。" },
+  { front:"ケガレとハレ",        back:"ケガレ（日常の濁り）をリセットし、ハレ（清浄・特別な状態）に戻る神社の仕組み。" },
+  { front:"御神木（ごしんぼく）",back:"鎮守の森のシンボル。著者は植物を「知的生命体」として尊重すべき存在と述べる。" },
+  { front:"真我（しんが）",      back:"本書で繰り返し使われる「本来の自分・魂の本質」。賜りし霊（ひ）と重なる概念。" }
+];
+
+// ─── TAB switch ───────────────────────────
+function switchTab(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-bar button').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+  if (id === 'fill' && !fillTimerRunning) startFillTimer();
+}
+
+// ─── FILL IN BLANK ────────────────────────
+let selectedWord = null;
+let fillCorrect = 0;
+let fillTotal = 12;
+let fillTimerRunning = false;
+let fillTimerInterval = null;
+let fillSeconds = 180;
+
+function selectWord(el) {
+  if (el.classList.contains('used')) return;
+  document.querySelectorAll('.word-chip').forEach(c => c.style.boxShadow = '');
+  selectedWord = el;
+  el.style.boxShadow = '0 0 0 3px var(--gold)';
+}
+
+function fillBlank(el) {
+  if (!selectedWord) return;
+  const ans = el.dataset.ans;
+  const chosen = selectedWord.textContent.trim();
+  if (chosen === ans) {
+    el.textContent = chosen;
+    el.classList.add('correct');
+    el.onclick = null;
+    selectedWord.classList.add('used');
+    selectedWord.style.boxShadow = '';
+    selectedWord = null;
+    fillCorrect++;
+    updateFillProgress();
+    if (fillCorrect === fillTotal) showGrade();
+  } else {
+    el.classList.add('wrong');
+    setTimeout(() => el.classList.remove('wrong'), 600);
+  }
+}
+
+function updateFillProgress() {
+  const pct = (fillCorrect / fillTotal) * 100;
+  document.getElementById('fill-prog-bar').style.width = pct + '%';
+  document.getElementById('fill-prog-text').textContent = fillCorrect + ' / ' + fillTotal;
+}
+
+function startFillTimer() {
+  fillTimerRunning = true;
+  fillTimerInterval = setInterval(() => {
+    fillSeconds--;
+    const m = String(Math.floor(fillSeconds/60)).padStart(2,'0');
+    const s = String(fillSeconds%60).padStart(2,'0');
+    document.getElementById('fill-timer').textContent = m+':'+s;
+    if (fillSeconds <= 0) { clearInterval(fillTimerInterval); showGrade(); }
+  }, 1000);
+}
+
+function showGrade() {
+  clearInterval(fillTimerInterval);
+  const ratio = fillCorrect / fillTotal;
+  const gc = document.getElementById('grade-circle');
+  const gm = document.getElementById('grade-msg');
+  const gs = document.getElementById('grade-sub');
+  let grade, cls, msg, sub;
+  if (ratio >= .8) {
+    grade='A'; cls='grade-A'; msg='素晴らしい！神社の知識マスター🏆';
+    sub='神氣があなたに宿っている！';
+    launchConfetti();
+  } else if (ratio >= .5) {
+    grade='B'; cls='grade-B'; msg='よくできました！もう一息👍';
+    sub='学習タブをもう一度読み返してみよう。';
+  } else {
+    grade='C'; cls='grade-C'; msg='もう一度チャレンジ💪';
+    sub='穴埋めのヒントは学習タブにあるよ。';
+  }
+  gc.className = 'grade-circle ' + cls;
+  gc.textContent = grade;
+  gm.textContent = msg;
+  gs.textContent = sub;
+  document.getElementById('fill-grade').classList.add('show');
+}
+
+function resetFill() {
+  clearInterval(fillTimerInterval);
+  fillCorrect = 0; fillSeconds = 180; fillTimerRunning = false;
+  document.querySelectorAll('.blank').forEach(b => {
+    b.classList.remove('correct','wrong');
+    b.textContent = '　　　　';
+    b.onclick = function(){ fillBlank(this); };
+  });
+  document.querySelectorAll('.word-chip').forEach(c => {
+    c.classList.remove('used'); c.style.boxShadow = '';
+  });
+  selectedWord = null;
+  document.getElementById('fill-timer').textContent = '03:00';
+  document.getElementById('fill-prog-bar').style.width = '0%';
+  document.getElementById('fill-prog-text').textContent = '0 / 10';
+  document.getElementById('fill-grade').classList.remove('show');
+}
+
+// ─── MC QUIZ ──────────────────────────────
+let mcIdx = 0;
+let mcAnswered = new Array(mcData.length).fill(null);
+
+function renderMC() {
+  const d = mcData[mcIdx];
+  let optsHTML = d.opts.map((o, i) =>
+    `<button class="mc-opt${mcAnswered[mcIdx]!==null ? (i===d.ans?' correct':(i===mcAnswered[mcIdx]?' wrong':'')) : ''}"
+      onclick="answerMC(${i})">${o}</button>`
+  ).join('');
+  let fbHTML = '';
+  if (mcAnswered[mcIdx] !== null) {
+    const ok = mcAnswered[mcIdx] === d.ans;
+    fbHTML = `<div class="mc-feedback show ${ok?'good':'bad'}">${ok?'✅ 正解！':'❌ 不正解。正しくは「'+d.opts[d.ans]+'」です。'}<br>${d.expl}</div>`;
+  }
+  document.getElementById('mc-container').innerHTML =
+    `<div class="mc-question"><div class="mc-q-text">Q${mcIdx+1}. ${d.q}</div><div class="mc-options">${optsHTML}</div>${fbHTML}</div>`;
+  document.getElementById('mc-count').textContent = (mcIdx+1)+' / '+mcData.length;
+  document.getElementById('mc-prev').disabled = mcIdx === 0;
+  document.getElementById('mc-next').disabled = mcIdx === mcData.length-1;
+}
+
+function answerMC(i) {
+  if (mcAnswered[mcIdx] !== null) return;
+  mcAnswered[mcIdx] = i;
+  renderMC();
+}
+
+function mcMove(dir) {
+  mcIdx = Math.max(0, Math.min(mcData.length-1, mcIdx+dir));
+  renderMC();
+}
+
+function mcReset() {
+  mcIdx = 0;
+  mcAnswered = new Array(mcData.length).fill(null);
+  renderMC();
+}
+
+// ─── FLASHCARDS ───────────────────────────
+let fcIdx = 0;
+let fcFlipped = false;
+
+function renderFC() {
+  const d = fcData[fcIdx];
+  document.getElementById('fc-front').textContent = d.front;
+  document.getElementById('fc-back').innerHTML =
+    `<div class="answer-label">解説</div><div>${d.back}</div>`;
+  document.getElementById('fc-counter').textContent = (fcIdx+1)+' / '+fcData.length;
+  fcFlipped = false;
+  document.getElementById('fc-inner').classList.remove('flipped');
+}
+
+function flipCard() {
+  fcFlipped = !fcFlipped;
+  document.getElementById('fc-inner').classList.toggle('flipped', fcFlipped);
+}
+
+function fcMove(dir) {
+  fcIdx = (fcIdx + dir + fcData.length) % fcData.length;
+  renderFC();
+}
+
+// ─── CONFETTI ─────────────────────────────
+function launchConfetti() {
+  const canvas = document.getElementById('confetti-canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+  const pieces = Array.from({length:120}, () => ({
+    x: Math.random()*canvas.width,
+    y: -20,
+    w: Math.random()*10+5,
+    h: Math.random()*6+3,
+    color: ['#b8972a','#c0392b','#2d5a3d','#2980b9','#f0e6b8','#ffffff'][Math.floor(Math.random()*6)],
+    vx: (Math.random()-0.5)*3,
+    vy: Math.random()*3+2,
+    rot: Math.random()*360,
+    vrot: (Math.random()-0.5)*6
+  }));
+  let frame = 0;
+  function draw() {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    pieces.forEach(p => {
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot * Math.PI/180);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+      ctx.restore();
+      p.x += p.vx; p.y += p.vy; p.rot += p.vrot;
+    });
+    frame++;
+    if (frame < 150) requestAnimationFrame(draw);
+    else ctx.clearRect(0,0,canvas.width,canvas.height);
+  }
+  draw();
+}
+
+// ─── INIT ─────────────────────────────────
+renderMC();
+renderFC();
+</script>
+</body>
+</html>
